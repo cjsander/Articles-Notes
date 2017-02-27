@@ -1,0 +1,34 @@
+TOPIC:  
+Debugging A Windows Service
+
+1. Navigate to the windows service project.
+2. From toolbar, select Project --> Properties
+3. Set "Output type:" dropdown to "Console Application"
+4. Open Program.cs, locate Main method, and add the following:
+static void Main(string[] args)
+        {
+            //to test and debug
+            if (Environment.UserInteractive)
+            {
+                YourWinService serviceHb = new YourWinService(args);
+                serviceHb.TestStartupAndStop(args);
+            }
+            else
+            {
+                var servicesToRun = new ServiceBase[]
+            {
+                new YourWinService(args)
+            };
+                ServiceBase.Run(servicesToRun);
+            }
+        }
+		
+5. Navigate to your service code and add the following method:
+		//to test and debug
+        internal void TestStartupAndStop(string[] args)
+        {
+            this.OnStart(args);
+            Console.ReadLine();
+            this.OnStop();
+        }
+6. Set breakpoints and run as console app.
