@@ -1,0 +1,18 @@
+TOPIC: 
+Customize Builds Per Environment
+https://code.msdn.microsoft.com/ASPNET-Web-Deployment-c2d409f9
+
+Two Options:
+1.  Web.Config Transformations
+	https://msdn.microsoft.com/en-us/library/dd465326.aspx
+2.  Deployment Parameters:  Useful when you have to create a package without knowing some of the values that will be needed when the package is installed.
+	https://msdn.microsoft.com/en-us/library/ff398068.aspx
+	
+Web.Config Transform:
+1. Open Build --> Configuration Manager
+2. Create new "Active solution configuration" for each version you need and then close.
+3. Navigate to Solution Explorer and right-click on your web.config and select "Add Config Transform."  This should generate the new config files you created in Configuration Manager.
+4. Open the transform file for the build configuration that you want to work with.
+
+
+	
