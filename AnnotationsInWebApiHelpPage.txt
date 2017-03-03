@@ -1,0 +1,28 @@
+TOPIC:  
+Adding custom ASP.NET WebApi Help Page
+1.  Add annotations to model, controller, etc. using System.ComponentModel.DataAnnotations
+2.  Navigate to project "Properties" --> "Build" --> Output
+3.  Check "XML Documentation file:", then type in a name for the help document xml, and save
+4.  In the solution, navigate to "Areas" --> "App_Start" --> "HelpPageConfig.cs"
+5.  Uncomment the "config.SetDocumentationProvider..." line, add your created name for the help document xml, and save:
+		config.SetDocumentationProvider(new XmlDocumentationProvider(HttpContext.Current.Server.MapPath("~/App_Data/DevOpsTaskHelp.XML")));
+6.  Build solution, navigate to help page "API", and your annotations should be present.
+
+REFERENCE(S):
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/creating-api-help-pages
+https://blogs.msdn.microsoft.com/yaohuang1/2012/09/30/asp-net-web-api-help-page-part-1-basic-help-page-customizations/
+
+
+Adding XML WebApi Comments To Swagger:
+1.  Install-Package "Swashbuckle"
+2.  Open the "SwaggerConfig.cs" file and uncomment the following line:
+			c.IncludeXmlComments(GetXmlCommentsPath());
+3.  Generate method for "GetXmlCommentsPath()"
+		 private static string GetXmlCommentsPath()
+        {
+            return System.String.Format(@"{0}\bin\DevOpsTaskHelp.XML", System.AppDomain.CurrentDomain.BaseDirectory);
+        }
+		
+		
+		
+
