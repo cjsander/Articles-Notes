@@ -1,0 +1,30 @@
+TOPIC:  FEATURE FLAG / TOGGLE DEPLOYMENTS
+
+When I first saw a demo of Feature Flag deployments, I was very pleased.  It was a nice demo: https://youtu.be/Fj3TvaovPe0
+It seened it would reduce branching in source control, allow for testing and monitoring, make extra room for useability testing, ...  all without having to create and deploy a new build every time.
+
+On closer look, I realized that this concept is nothing new.  I've been practicing this type of methodology (the "magic string" version) for years as have many developers.  Essentially, you can make a given feature or functionality configurable via some type of variable.  This could be a web.config, Sql table, etc. Over time, this can get messy without organization and clean-up.  Inactivating or making a feature "permanent" can get sloppy. At some point, some clever dev organized this hairy practice and then slapped a name on it.
+
+Regardless, it is a valid approach for appropriate projects.  Also, it fits very well with an agile approach.  In an ideal dev world, we would be able to have all of our environments the same using same data.  We also would not have to create a lengthy painful series of tickets to get our code pushed through the environments for each feature.  Customers who tend to frequently change their minds on the what and how of features are also allowed a little more wiggle-room; thus, easing all of our burdens.
+
+There are a number of options as to how to use Feature Flags.  Third-party vendors sell their version of the process, there are numerous .NET libraries, and you can make your own hybrid.  It can also be incorporated into the bitbucket pipeline which is nice.
+
+LINKS:
+
+INFO:
+https://martinfowler.com/articles/feature-toggles.html
+
+VENDORS:
+https://launchdarkly.com
+https://bitbucket.org/product/features/pipelines
+
+OPEN SOURCE:
+https://github.com/jason-roberts/FeatureToggle
+https://github.com/benaston/NFeature
+https://github.com/mexx/FeatureSwitcher
+
+
+
+	
+
+
