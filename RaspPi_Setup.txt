@@ -1,0 +1,14 @@
+Raspberry Pi Setup
+
+1.  Place pre-formated sd micro card into pi
+2.  Attach a keyboard, mouse, and tv/monitor to the pi
+3.  Attach USB power to start up the RPi
+4.  Screen will start up with a toolbar at the top
+5.  Navigate to the Raspberry icon and go into "Preferences" to set time, country, etc.
+6.  Click to open up the terminal window and then type the following to update the OS:
+	--"..."
+7.  In terminal window, type the following to upgrade:
+	--"..."
+8.  Reboot system by going into pi icon --> "Reboot"
+
+The sd card can be kept in your pi.  It is safe to update the Rasbian OS frequently as it tends to be stable.  You can also create other sd card variants.   It is advised to get "sdformat..."*?
