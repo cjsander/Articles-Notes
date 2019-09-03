@@ -1,0 +1,10 @@
+Getting “fatal: Authentication failed” -error when sending git commands in Windows 10
+
+After updating domain password, accessing git-repo is no longer possible. VS Code and Source Tree as well as Visual Studio are returning the following error message on pull, push, fetch etc..
+
+fatal: Authentication failed
+
+
+Under Windows Credentials\Windows Vault page on Generic Credentials, you can update the password of existing GIT record or can also add new Generic Credentials.
+
+https://stackoverflow.com/questions/42830318/getting-fatal-authentication-failed-error-when-sending-git-commands-in-windo
