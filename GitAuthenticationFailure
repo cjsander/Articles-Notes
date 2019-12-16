@@ -1,0 +1,11 @@
+Pushing localCreateReportImportLogic
+Error encountered while pushing to the remote repository: Git failed with a fatal error.
+Authentication failed for 'https://fusion.mastercard.int/stash/scm/mic/mic-code-base.git/'
+Pushing to https://hub.techsols.int/stash/scm/mic/legt-code-base.git
+
+Open "Credential Manager" at "Control Panel\All Control Panel Items\Credential Manager"
+
+Select "Windows Credentials" and locate the credential associated with Git.
+ie, "git:https://hub.techsols.int"
+
+Click "Edit" and update to your latest Windows password.
