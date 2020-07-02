@@ -1,0 +1,305 @@
+Contents
+TYPESCRIPT	2
+TYPESCRIPT DEPENDENCIES	2
+dependencies	2
+devDependencies	2
+peerDependencies	2
+@types	2
+TSCONFIG.JSON	3
+REACT	3
+ARCHITECTURE	3
+JSX	4
+Destructuring	4
+COMPONENTS: RENDERING	4
+ROUTERS	5
+ACTIONS	5
+REDUCERS	5
+STATE	5
+REACT/REDUX	6
+Provider	6
+Connect	7
+mapStateToProps	7
+mapDispatchToProps	7
+INDEX.TS	7
+FUNCTIONAL COMPONENTS: TSX	7
+STATE	8
+PROPS	8
+mapStateToProps	8
+mapDispatchToProps	9
+JSX	9
+REDUX	10
+SAGAS	10
+SAGA SIDE EFFECTS	10
+THUNKS VS SAGAS	10
+GENERATORS	11
+SELECTORS	11
+DRAFT STATE	11
+OTHER TECHNOLOGIES	11
+CREATE-REACT-APP	11
+YARN	12
+WEBPACK	12
+REDUX DEV TOOL	12
+LODASH	12
+AXIOS	12
+RESOURCES	13
+DIAGRAMS	14
+
+TYPESCRIPT
+TYPESCRIPT DEPENDENCIES
+
+Make TypeScript a devDependency instead. That way you and your coworkers will always get the correct version when you run npm install. And updating your TypeScript version follows the same pattern as updating any other package.
+dependencies
+These are packages that are required to run your JavaScript. If you import lodash at runtime, then it should go in dependencies. When you publish your code on npm and another user installs it, it will also install these dependencies. (These are known as transitive dependencies.)
+devDependencies
+These packages are used to develop and test your code but are not required at runtime. Your test framework would be an example of a devDependency. Unlike dependencies, these are not installed transitively with your packages.
+peerDependencies
+These are packages that you require at runtime but don’t want to be responsible for tracking. The canonical example is a plug-in. Your jQuery plug-in is compatible with a range of versions of jQuery itself, but you’d prefer that the user select one, rather than you choosing for them.
+@types
+The next type of dependency to consider is type dependencies or @types. If a library itself does not come with TypeScript type declarations, then you may still be able to find typings on DefinitelyTyped, a community-maintained collection of type definitions for JavaScript libraries. Type definitions from DefinitelyTyped are published on the npm registry under the @types scope: @types/jquery has type definitions for the jQuery, @types/lodash has types for Lodash, and so on. These @types packages only contain the types. They don’t contain the implementation.
+
+Your @types dependencies should also be devDependencies, even if the package itself is a direct dependency. For example, to depend on React and its type declarations, you might run:
+.d.ts
+This is a declaration file containing types used by a library.
+TSCONFIG.JSON
+$ tsc --init
+REACT
+A UI component library. The UI components are created with React using JavaScript, not a special template language. This approach is called creating composable UIs, and it’s fundamental to React’s philosophy.
+
+React UI components are highly self-contained, concern-specific blocks of functionality. For example, there could be components for date-picker, captcha, address, and ZIP code elements. Such components have both a visual representation and dynamic logic. Some components can even talk to the server on their own: for example, an autocomplete component might fetch the autocompletion list from the server.
+Simplicity is achieved with the following features:
+•	Declarative over imperative style—React embraces declarative style over imperative by updating views automatically.
+•	Component-based architecture using pure JavaScript—React doesn’t use domain-specific languages (DSLs) for its components, just pure JavaScript. And there’s no separation when working on the same functionality.
+•	Powerful abstractions—React has a simplified way of interacting with the DOM, allowing you to normalize event handling and other interfaces that work similarly across browsers.
+ARCHITECTURE
+Moving from MVC because of problems on the client side, React uses “Model-View-Intent” architecture.
+“User interfaces are notoriously complicated to implement. To provide the experience that users want and expect, they must deal with many orthogonal concerns, as well as asynchronous and event-based processing. The permutations of possible pathways are effectively infinite. It's easy for programmers to dig themselves into terrible holes when creating user interfaces. The implementation of user interfaces are often difficult to understand and nearly impossible to maintain. In the React world, a number of ideas and patterns have emerged that help to simplify the implementation of user interfaces, so that it is possible to implement a user interface that is well-structured, obvious, and understandable. 
+The first of these ideas is that a user interface should derive entirely from an application state. The second is that the application state should be externalized in a single source of truth and modified via carefully controlled mutations. Managing application state is a simple idea, but the implementation can easily become unnecessarily complex. The layers of optimizations that are added onto mature applications obscure the true simplicity of the ideas. For this reason, this module will introduce state management for React application by building up from first principles. I aim to show that the important ideas are straightforward, and the more advanced techniques may optionally be added if and when required. Before we can talk about how to manage state, we must understand the architecture that state containers exist to facilitate. Simplicity is hard. And to achieve it, we must have a clear vision of the architectural ideal we are striving for. We will learn about the model-view-intent architecture and implement a simple example using plain JavaScript. A state container is a tool
+You have probably heard of model-view-controller, a common pattern for server side web applications. When web development first begin to move to the browser, many different libraries attempted to port the model-view-controller ideas into client-side frameworks. Angular 1 is an example of this. Over time, developers learned that model-view-controller didn't work well on the client side, and new ideas gained popularity.
+An application built with the model-view-intent architecture is described by three components. The model, the view, and intents. 
+The model is a single object that completely describes the state of the user interface. 
+The view is a function that transforms the model into the user interface. That is the model is the input to the view function and the user interface is the output of the view function. At any moment, the user interface can be generated based on nothing but the model. When the model changes, the view function can generate the corresponding changed user interface, which leads us to the question, "How is the model changed? " the user interface generated by the view function can produce intents. Intents are things the user wants to do.”
+
+JSX
+React is almost always used with JSX—a tiny language that lets developers write React UIs more eloquently. You can transpile JSX into regular JavaScript by using Babel or a similar tool.
+Destructuring 
+was introduced in ES6. It’s a JavaScript feature that allows us to extract multiple pieces of data from an array or object and assign them to their own variables.
+COMPONENTS: RENDERING
+Previously, we only encountered React elements that represent DOM tags:
+const element = <div />;
+However, elements can also represent user-defined components:
+const element = <Welcome name="Sara" />;
+When React sees an element representing a user-defined component, it passes JSX attributes and children to this component as a single object. We call this object “props”.
+For example, this code renders “Hello, Sara” on the page:
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+const element = <Welcome name="Sara" />;
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+
+ROUTERS
+React Router is a collection of navigational components that compose declaratively with your application. Whether you want to have bookmarkable URLs for your web app or a composable way to navigate in React Native, React Router works wherever React is rendering
+Unlike Angular, Ember, or Backbone, React doesn’t come with a standard router. Recognizing the importance of a routing solution, engineers Michael Jackson and Ryan Florence created one named simply React Router. The React Router has been adopted by the community as a popular routing solution for React apps
+ACTIONS
+Usually uppercase, actions provide instructions about what to do should app state change along with the required data.
+REDUCERS
+Function that takes state in an action and returns a new state
+STATE
+A change in the state happens based on user-input, triggering an event, and so on. Also, React components (with state) are rendered based on the data in the state. State holds the initial information.
+
+So when state changes, React gets informed and immediately re-renders the DOM – not the whole DOM, but only the component with the updated state. This is one of the reasons why React is fast.
+And how does React get notified? You guessed it: with setState( ). The setState( ) method triggers the re-rendering process for the updated parts. React gets informed, knows which part(s) to change, and does it quickly without re-rendering the whole DOM.
+In summary, there are 2 important points we need to pay attention to when using state:
+•	State shouldn’t be modified directly – the setState( ) should be used
+•	State affects the performance of your app, and therefore it shouldn’t be used unnecessarily
+Can I use state in every component?
+Another important question you might ask about state is where exactly we can use it. In the early days, state could only be used in class components, not in functional components.
+That’s why functional components were also known as stateless components. However, after the introduction of React Hooks, state can now be used both in class and functional components.
+If your project is not using React Hooks, then you can only use state in class components.
+What are the differences between props and state?
+Finally, let’s recap and see the main differences between props and state:
+•	Components receive data from outside with props, whereas they can create and manage their own data with state
+•	Props are used to pass data, whereas state is for managing data
+•	Data from props is read-only, and cannot be modified by a component that is receiving it from outside
+•	State data can be modified by its own component, but is private (cannot be accessed from outside)
+•	Props can only be passed from parent component to child (unidirectional flow)
+•	Modifying state should happen with the setState ( ) method
+REACT/REDUX
+React-redux is an extra module that helps with the integration of React and Redux. For sophisticated React and Redux users, it helps to make code neater and add some useful features. 
+For beginners, it obscures the simplicity of React and Redux and make things more difficult to learn. Make sure you understand React and Redux on their own before you look to use React-redux to integrate them. 
+The main service provided by React-redux is to connect React components to the application state. 
+React-redux can provide data from the Redux store to components when the component is rendered, and it can provide a way for components to publish actions that can then be used to modify the Redux store. 
+Provider 
+is a React component provided by React-redux. When it is included in a React application, it enables all React components below it in the component tree, that is its children or children's children, et cetera to connect to the Redux store. 
+Connect 
+is a function provided by React-redux that enhances React components connecting them to the Redux store in the ways specified. To specify what data from the Redux store should be provided to the React component as props, connect expects a parameter called mapStateToProps. 
+mapStateToProps 
+is a function from the Redux store to a set of props for the component. Takes care of getting data from the store to the component. 
+mapDispatchToProps
+ takes care of specifying how the component can send actions to the Redux store. mapDispatchtoProps is a function from Redux's dispatch function to a set of props for the component.
+
+REDUX:  “a predictable state container for JavaScript apps”
+In traditional react, each component maintains it’s own state. If you want to move state component from parent to child component, you can pass it using props. However, if one wants to share state between two components which are not in parent-child relationship, then it gets messy
+This is where state management tools like Redux come in handy. Redux maintains a single Store. Any component connected to this store can update state, or read state. The connected component that has access to store is called container. When any component wants to update the store, it calls an Action. Then we have functions called Reducers, which reads these actions and return an updated state. All the components update based on the new state.
+REF: https://medium.com/@ksholla20/react-redux-with-typescript-ad7266896a9b
+
+INDEX.TS
+In Angular, a barrel is a term for an index.ts file. A barrel is a way to roll-up exports from several modules into a single module. Now a consumer can import what it needs from the barrel.  Might be considered a barrel for the “view layer”
+REF: https://stackoverflow.com/questions/37564906/what-are-all-the-index-ts-used-for
+FUNCTIONAL COMPONENTS: TSX
+Unlike in javascript, we import react as import * as React from “react”;
+To define Props, we need to define an interface and define all the prop types. Similarly, to define local state, we need to first define an interface declaring all state variables, and then define it in the component
+Example:
+//External
+import * as React from 'react';
+
+// Inter Module
+import {datasetsApi } from 'Datasets';
+
+//Intra Module
+import { createPublishDestination } from 'PublishDestinations/Services/PublishDestinationsActions';
+import * as Actions from 'PublishDestinations/Services/PublishDestinationsActions';
+
+//main  (ui)
+const PublishDestinationCreatorInternal: React.FC<ReturnType<typeof mapDispatchToProps> &
+	ReturnType<typeof mapStateToProps>> = ({ createPublishDestination, datasets, hasFetchedDatasets }) => { … }
+
+//bottom
+const mapStateToProps = (state: AppState) => ({
+	datasets: datasetsApi.selectors.getDatasetsSelector(state),
+	hasFetchedDatasets: datasetsApi.selectors.getHasFetchedDatasetsSelector(state),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<ActionType<typeof Actions>>) => ({
+	createPublishDestination: (publishDestination: PublishDestinationSettings) =>
+		dispatch(createPublishDestination.request(publishDestination)),
+});
+
+export const PublishDestinationCreator = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(PublishDestinationCreatorInternal);
+
+
+
+STATE
+In addition to props React components have another way of holding data called State. Props are values passed in by a component's parent. Its state is local, mutable data that can be created and modified within the component. Having local data that can change within a component increases complexity and limits the composability of the component. As such, you should avoid using state when possible which is nearly always.
+PROPS
+React is a component-based library which divides the UI into little reusable pieces. In some cases, those components need to communicate (send data to each other) and the way to pass data between components is by using props.
+“Props” is a special keyword in React, which stands for properties and is being used for passing data from one component to another.  But the important part here is that data with props are being passed in a uni-directional flow. (one way from parent to child)  Furthermore, props data is read-only, which means that data coming from the parent should not be changed by child components.
+
+mapStateToProps    
+https://react-redux.js.org/using-react-redux/connect-mapstate
+As the first argument passed in to connect, mapStateToProps is used for selecting the part of the data from the store that the connected component needs. It’s frequently referred to as just mapState for short.
+•	is called every time the store state changes.
+•	It receives the entire store state, and should return an object of data this component needs.
+•	Return Values Determine If Your Component Re-Renders
+mapDispatchToProps
+As the second argument passed in to connect, mapDispatchToProps is used for dispatching actions to the store.
+dispatch is a function of the Redux store. You call store.dispatch to dispatch an action. This is the only way to trigger a state change.
+With React Redux, your components never access the store directly - connect does it for you. React Redux gives you two ways to let components dispatch actions:
+•	By default, a connected component receives props.dispatch and can dispatch actions itself.
+•	connect can accept an argument called mapDispatchToProps, which lets you create functions that dispatch when called, and pass those functions as props to your component.
+The mapDispatchToProps functions are normally referred to as mapDispatch for short, but the actual variable name used can be whatever you want.
+Your mapDispatchToProps function should return a plain object:
+•	Each field in the object will become a separate prop for your own component, and the value should normally be a function that dispatches an action when called.
+•	If you use action creators ( as oppose to plain object actions ) inside dispatch, it is a convention to simply name the field key the same name as the action creator:
+JSX
+JSX is an external domain specific language that is optimized for generating XML-like documents.  
+JSX allows us to include XML-like syntax in line in JavaScript. React uses JSX to describe the composition of react components in a readable way. The JSX transformer preprocesses the JSX and converts each element into a JavaScript function call. Most projects use Babel to convert JSX to JavaScript. The typescript compiler is also capable of compiling JSX. So if you use typescript, you don't have to use Babel as well. JSX is a syntax included in line in JavaScript files that is converted by a preprocessor like Babel into regular JavaScript.
+Not everyone likes JSX. Some people choose to use react but choose not to use JSX. For example, if you wanted to avoid a compilation step. We've seen how the JSX transformer converts JSX syntax into JavaScript function calls. If we want, we can simply skip directly to the JavaScript version. The typical workflow is to write components with JSX, process the JSX through the JSX transformer and finish with nested function calls representing react components. The alternative, is to bypass JSX completely and skip directly to the JavaScript function calls. JSX can be easier to read but there is a price to pay. The foremost problem is that a script that includes JSX is not valid JavaScript. It can't be minified, processed through a linter, debugged in the browser or formatted with a JavaScript syntax highlighter.
+REDUX
+
+SAGAS
+A way to write and reason complex async behavior.  Operates as middleware, See chapter 6.
+import axios from 'axios';
+import { call, put, takeLatest, all, fork, takeLeading } from 'redux-saga/effects';
+Creates functions and exports watches
+export function* datasetAttributeMappingManagerSagas() {
+	yield all([
+		fork(watchGetDatasetAttributeMappingAsync),
+		fork(watchCreateDatasetAttributeMappingAsync),
+		fork(watchDeleteDatasetAttributeMappingAsync),
+		fork(watchGetAttributeMetadataAsync),
+
+What does “yield takeLatest” mean?
+SAGA SIDE EFFECTS
+Side effects, in this context, are any interactions with the world beyond your Redux application. Most examples can be summarized as interactions with a server or local storage.
+THUNKS VS SAGAS
+Thunks interact with a remote server to fetch a list of tasks or create a new one. To review, the Redux store and its reducers know what to do with actions. Actions describe events—opening a modal, for example, can be the result of a clicked button dispatching an action of type OPEN_MODAL.
+Things get more complicated when the contents of that modal need to be populated by an AJAX call. You could choose, for example, to dispatch an action only after the AJAX call returns, or dispatch several actions along the way to indicate loading progress. Again, the store deals in actions and is unequipped to handle functions or promises, so it’s up to you to make sure that whatever reaches the store is an action.
+Thunks have much going for them. They’re dead simple, ubiquitous in documentation, and powerful enough to be the only side effect management tool you’ll ever need.  Any tool has tradeoffs, of course. The simplicity of thunks makes them something of a double-edged sword. Thunks are easy to write, but you’re on your own to write advanced functionality.
+When you need to perform asynchronous activities, redux-thunk makes it possible for an action creator to return a function in lieu of an action. Within the fetchTasks action creator, an anonymous function (thunk) is returned. The thunk middleware provides the dispatch and getState arguments, so the body of the function can view the contents of the current store and dispatch new actions to indicate loading, success, or failure states. View the following listing for a recap.
+Sagas are built to handle the hairy and winding story of your data. Using an ES2015 feature, generators,         the redux-saga package offers a powerful way to write and reason about complex asynchronous behavior. With a little new syntax, sagas can         make asynchronous code as readable as synchronous code.
+GENERATORS
+Generators enable powerful functionality, but the syntax is foreign, and their use cases are still being discovered. For many    React developers, redux-saga is their first introduction to generator functions.                  Put simply, generators are functions that can be paused and resumed.
+Generators look like any other function, except they’re declared with an asterisk following the function keyword, as in the following example:
+function* exampleGenerator() { ... }
+Generators can yield results. The yield keyword can be used to return a value from the generator function.
+What the generator returns is called an iterator. Iterators are objects, but they’re not empty. They keep track of where they are in a sequence and can return the next value in the sequence. Iterators have a next function that can be used to execute code within the generator up until the next yield:
+		exampleGenerator();        //=> {}
+		exampleGenerator().next(); //=> { value: 42, done: false }
+
+SELECTORS
+Selects data from the redux store.  Similar to JS built-in find method.  could also place this function in the course reducer so that it could be called by other components. For performance, you could even memorize the response with a library like reselect.
+DRAFT STATE
+The basic idea is that you will apply all your changes to a temporary draftState, which is a proxy of the currentState. Once all your mutations are completed, Immer will produce the nextState based on the mutations to the draft state. This means that you can interact with your data by simply modifying it while keeping all the benefits of immutable data.
+
+OTHER TECHNOLOGIES
+CREATE-REACT-APP
+INSTALLATION:
+npx create-react-app my-app --template typescript
+# or
+yarn create react-app my-app --template typescript
+
+YARN
+classic.yarnpkg.com
+WEBPACK
+https://webpack.js.org/guides/getting-started/
+webpack is used to compile JavaScript modules.  
+Problems with managing JavaScript projects:
+•	It is not immediately apparent that the script depends on an external library.
+•	If a dependency is missing, or included in the wrong order, the application will not function properly.
+•	If a dependency is included but not used, the browser will be forced to download unnecessary code.
+Let's use webpack to manage these scripts instead.
+By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
+As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a configuration file.
+A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way.
+REDUX DEV TOOL
+https://codeburst.io/redux-devtools-for-dummies-74566c597d7
+
+LODASH
+https://lodash.com/
+A JavaScript utility library delivering consistency, modularity, performance, & extras.  Provides utility functions for common programming tasks using the functional programming paradigm.  helps programmers write more concise and maintainable JavaScript. It can be broken down into several main areas: Utilities - for simplifying common programming tasks such as determining type as well as simplifying math operations. 
+
+AXIOS
+The most popular promise based HTTP clients for both browsers and Node.js.   Used to make API requests and display the response.
+# Create a new app.
+create-react-app axios-react-tutorial
+
+
+REFERENCE:
+https://create-react-app.dev/docs/adding-typescript/
+RESOURCES
+https://reactjs.org/docs/components-and-props.html
+https://blog.isquaredsoftware.com/2018/11/react-redux-history-implementation/
+https://react-redux.js.org/introduction/why-use-react-redux
+https://react-redux.js.org/using-react-redux/connect-mapstate
+https://codeburst.io/defining-and-using-react-redux-mapdispatchtoprops-a73b5977c3e7
+https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#function-components
+https://decembersoft.com/posts/starting-a-react-redux-project-with-typescript/
+
+DIAGRAMS
+ 
+ 
+ 
+ 
+
+
+NOTES:
+Actions:
+
+
