@@ -1,4 +1,0 @@
-Topic:  Proxy Servers
-Challenge:  Set up proxy servers:  one 'regular', one 'invisible', one 'reverse-proxy'
-
-http://whatis.techtarget.com/definition/proxy-server
